@@ -17,6 +17,16 @@ The system provides:
 - SMS alerts via GSM  
 - Local LCD display  
 - Data logging on SD card  
+---
+## 📷Preview
+
+<div style="align:center;">
+  <img width="1500" height="1875" alt="circuit image" src="https://github.com/user-attachments/assets/fb377c57-c1b7-4efe-b0e2-d3d4175635a6" />
+</div>
+
+<div style="align:center;">
+  <img width="801" height="629" alt="dashboard" src="https://github.com/user-attachments/assets/83b1899f-91b2-4f90-8f6b-a95928ed7dd4" />
+</div>
 
 ---
 
@@ -121,7 +131,6 @@ The system sends an SMS when:
 - Current consumption is unusual  
 
 ---
-
 ## 🎯 Objectives
 
 - Create a complete and functional home automation prototype  
