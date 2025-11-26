@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Capteurs</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body class="bg-light">
+
+    <div class="container py-4">
+
+        <h2 class="text-center mb-4">📊 Dashboard </h2>
+
+        <!-- TABLEAU DES MESURES -->
+        <div class="card mb-4 shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Tableau des dernières mesures</h5>
+            </div>
+            <div class="card-body">
+
+                <table class="table table-striped text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>Temp. Intérieure (°C)</th>
+                            <th>Temp. Extérieure (°C)</th>
+                            <th>Courant (A)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Lignes générées automatiquement -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <!-- GRAPHIQUES -->
+        <div class="row">
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white">Température Intérieure</div>
+                    <div class="card-body">
+                        <canvas id="tempInChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white">Température Extérieure</div>
+                    <div class="card-body">
+                        <canvas id="tempOutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white">Courant (A)</div>
+                    <div class="card-body">
+                        <canvas id="currentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SCRIPT -->
+    <script>
+
+        // ----- VALEURS D’EXEMPLE -----
+        const labels = [
+            "2025-01-10 10:20",
+            "2025-01-10 10:25",
+            "2025-01-10 10:30",
+            "2025-01-10 10:35",
+            "2025-01-10 10:40"
+        ];
+
+        const tempInside =  [22.1, 22.4, 22.7, 22.5, 22.3];
+        const tempOutside = [18.5, 18.7, 19.0, 18.8, 18.6];
+        const current     = [1.2, 1.3, 1.1, 1.4, 1.2];  // en Ampères
+
+
+        // ----- AJOUT AU TABLEAU -----
+        const tableBody = document.getElementById("tableBody");
+
+        for (let i = 0; i < labels.length; i++) {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${labels[i]}</td>
+                    <td>${tempInside[i]} °C</td>
+                    <td>${tempOutside[i]} °C</td>
+                    <td>${current[i]} A</td>
+                </tr>
+            `;
+        }
+
+
+        // ----- GRAPHIQUES -----
+
+        new Chart(document.getElementById("tempInChart"), {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Température Intérieure",
+                    data: tempInside,
+                    borderColor: "red",
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            }
+        });
+
+        new Chart(document.getElementById("tempOutChart"), {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Température Extérieure",
+                    data: tempOutside,
+                    borderColor: "orange",
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            }
+        });
+
+        
+        new Chart(document.getElementById("currentChart"), {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Courant (A)",
+                    data: current,
+                    borderColor: "green",
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            }
+        });
+
+    </script>
+
+</body>
+</html>
